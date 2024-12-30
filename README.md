@@ -1,31 +1,67 @@
-Kanbafy
-=======
+# Skanban
 
-Kanbafy is a ScalaFX-sbt project for the Programming Studio 2 course.
-The program is a simple Kanban board application for project management.
+![SBT version](https://img.shields.io/badge/SBT-v1.10.7-white.svg?labelColor=darkred)
+![Scala version](https://img.shields.io/badge/Scala-3.3.4_LTS-194E5C.svg?labelColor=BA3030)
+![ScalaFX version](https://img.shields.io/badge/ScalaFX-v.23.0.1--R34-darkred.svg?labelColor=gray)
 
-## Project Structure
+**Skanban** is a simple kanban board desktop application for project
+management. It can help you manage your tasks through a simple drag-and-drop
+interface. Tasks can be organized in columns such as To Do, In Progress, and Done.
 
-    ├── build.sbt  <sbt configuration and dependency management>
-    └── src
-        ├── main
-        │   ├── resources     
-        │   │   ├── saveFiles  <save files>
-        │   │   └── styles  <css-files for styling>
-        │   └── scala  <program source code>
-        │       ├── gui  <GUI source code>
-        │       │   ├── components  <styled components>
-        │       │   └── scenes  <GUI scenes>
-        │       ├── logic  <app/board logic source code>
-        │       └── Main.scala  <main file for running the program>
-        └── test
-            └── scala   <unit testing source code>
- 
+The project is written in Scala 3, uses ScalaFX for its GUI and
+SBT for its build tool.
 
-## Running the program
+Originally Skanban was written as project for Aalto University's Programming
+Studio 2 course.
 
-In sbt shell:
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technical Details](#technical-details)
+- [License](#license)
 
-`run` to build and run the program.
+## Installation
 
-`test` to run the unit tests.
+You must have Scala and sbt installed. I suggest following the instructions
+the [Scala installation guide](https://www.scala-lang.org/download/) and using `cs setup`.
+It installs both Scala and SBT.
+
+Clone the repository...
+
+...
+
+## Usage
+
+### Running the application
+
+To run the program you must have SBT installed, see [installation](#installation).
+
+To run the application, navigate to this project in your terminal and run the command:
+```sbt run```
+
+## Technical Details
+
+### Project Structure
+
+```
+Skanban
+├─ build.sbt
+└─ src
+    ├── main
+    │   ├── resources
+    │   │   └── styles
+    │   └── scala
+    │       ├── gui
+    │       │   ├── components
+    │       │   └── scenes
+    │       ├── logic
+    │       └── Main.scala
+    └── test
+        └── scala
+            └── ...
+```
+
+## License
+
+This project is licensed under the MIT License.See the [LICENSE](LICENSE) file
+for details.
