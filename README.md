@@ -37,7 +37,9 @@ Clone the repository...
 To run the program you must have SBT installed, see [installation](#installation).
 
 To run the application, navigate to this project in your terminal and run the command:
-```sbt run```
+```
+sbt run
+```
 
 ## Technical Details
 
@@ -63,5 +65,5 @@ Skanban
 
 ## License
 
-This project is licensed under the MIT License.See the [LICENSE](LICENSE) file
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file
 for details.
