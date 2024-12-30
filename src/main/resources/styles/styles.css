@@ -1,0 +1,83 @@
+.main-container {
+    -fx-background-color: #232323;
+}
+
+/* ---------- MenuScene: ---------- */
+
+.kanbafy-title {
+    -fx-alignment: center;
+    -fx-font-size: 80;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 1em 0 2em 0;
+}
+
+.styled-button {
+    -fx-background-color: #282828;
+    -fx-padding: 10 30 10 30;
+    -fx-font-size: 35;
+    -fx-alignment: center;
+}
+
+.styled-button:hover {
+    -fx-background-color: #313131;
+}
+
+.menu-button {
+  -fx-text-fill: white;
+  -fx-border-color: white;
+}
+
+.quit-button {
+  -fx-text-fill: #ff7373;
+  -fx-border-color: #ff7373;
+}
+
+/* ---------- BoardScene: ---------- */
+
+.board-menu-bar {
+    -fx-background-color: #454545;
+}
+
+.board-menu-bar .label {
+    -fx-text-fill: white;
+}
+
+.board-menu-bar .menu .menu-item {
+    -fx-background-color: #454545;
+}
+
+.board-title {
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-padding: 0.3em;
+}
+
+.column {
+    -fx-background-color: gray;
+    -fx-font-size: 12;
+    -fx-margin: 1em;
+}
+
+.column-title {
+    -fx-background-color: darkgray;
+    -fx-alignment: center;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-padding: 1em;
+}
+
+.gui-card {
+    -fx-background-color: yellow;
+    -fx-margin: 1em;
+}
+
+.gui-card-title {
+    -fx-background-color: #FFD801;
+    -fx-alignment: center;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-padding: 0.5em;
+}
