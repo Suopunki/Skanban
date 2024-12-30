@@ -3,7 +3,7 @@ ThisBuild / scalaVersion := "3.3.4"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "Kanbafy",
+    name := "Skanban",
     libraryDependencies := Seq(
       "io.circe" %% "circe-core" % "0.14.10",
       "io.circe" %% "circe-generic" % "0.14.10",
