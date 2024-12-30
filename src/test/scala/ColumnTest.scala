@@ -4,7 +4,6 @@ import org.scalatest.matchers.should.Matchers
 import logic._
 
 class ColumnTest extends AnyFlatSpec with Matchers:
-
   "Column" should "move a card to another position when using moveCardToIndex" in:
     val column = new Column()
     for i <- 0 to 9 do
@@ -41,5 +40,4 @@ class ColumnTest extends AnyFlatSpec with Matchers:
     column.filterCardsByTag("even")
     column.removeFilter()
     column.cards.forall(_.tag == Some("even")) shouldEqual false
-
 end ColumnTest

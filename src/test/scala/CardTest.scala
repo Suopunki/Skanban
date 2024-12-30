@@ -1,11 +1,8 @@
-import java.time.LocalDate
 import logic._
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-
 class CardTest extends AnyFlatSpec with Matchers:
-
   "Card" should "return 0.0 when using checklistProgression and the checklist is empty " in:
     val card = new Card("Card")
     card.checklistProgress() shouldEqual 0.0
@@ -23,5 +20,4 @@ class CardTest extends AnyFlatSpec with Matchers:
       val item = card.addChecklistItem()
       item.setCompleted(true)
     card.checklistProgress() shouldEqual 1.0
-
 end CardTest

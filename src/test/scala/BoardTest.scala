@@ -4,7 +4,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class BoardTest extends AnyFlatSpec with Matchers:
-
   "Board" should "move column when using moveColumn" in:
     val board = new Board()
     val todoColumn = board.columns.head
@@ -58,6 +57,4 @@ class BoardTest extends AnyFlatSpec with Matchers:
     // remove filter
     board.removeFilter()
     board.columns.last.cards.length shouldEqual 3
-
-
 end BoardTest

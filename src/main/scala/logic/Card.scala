@@ -11,7 +11,7 @@ case class Card(
   var startDate: Option[Date] = None,
   var deadline: Option[Date] = None,
   var description: Option[String] = None,
-  var checklist: ArrayBuffer[ChecklistItem] = ArrayBuffer[ChecklistItem](),
+  var checklist: ArrayBuffer[ChecklistItem] = ArrayBuffer[ChecklistItem]()
 ):
 
   def setTitle(title: String): Unit =
