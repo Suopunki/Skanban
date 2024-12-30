@@ -3,6 +3,8 @@
 ![SBT version](https://img.shields.io/badge/SBT-v1.10.7-white.svg?labelColor=darkred)
 ![Scala version](https://img.shields.io/badge/Scala-3.3.4_LTS-194E5C.svg?labelColor=BA3030)
 ![ScalaFX version](https://img.shields.io/badge/ScalaFX-v.23.0.1--R34-darkred.svg?labelColor=gray)
+![License](https://img.shields.io/badge/Licence-MIT-darkred.svg)
+
 
 **Skanban** is a simple kanban board desktop application for project
 management. It can help you manage your tasks through a simple drag-and-drop
