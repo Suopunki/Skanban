@@ -6,12 +6,12 @@ import java.time.LocalDate as Date
 import scala.collection.mutable.ArrayBuffer
 
 case class Card(
-  var title: String = "New Card",
-  var tag: Option[String] = None,
-  var startDate: Option[Date] = None,
-  var deadline: Option[Date] = None,
-  var description: Option[String] = None,
-  var checklist: ArrayBuffer[ChecklistItem] = ArrayBuffer[ChecklistItem]()
+    var title: String = "New Card",
+    var tag: Option[String] = None,
+    var startDate: Option[Date] = None,
+    var deadline: Option[Date] = None,
+    var description: Option[String] = None,
+    var checklist: ArrayBuffer[ChecklistItem] = ArrayBuffer[ChecklistItem]()
 ):
 
   def setTitle(title: String): Unit =

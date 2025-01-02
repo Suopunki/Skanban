@@ -5,8 +5,8 @@ import io.circe.generic.semiauto._
 import scala.collection.mutable.ArrayBuffer
 
 case class Column(
-  var title: String = "new Column",
-  var cards: ArrayBuffer[Card] = ArrayBuffer[Card]()
+    var title: String = "new Column",
+    var cards: ArrayBuffer[Card] = ArrayBuffer[Card]()
 ):
 
   private var unfilteredCards = cards

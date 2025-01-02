@@ -37,9 +37,9 @@ import scalafx.scene.layout.{BorderPane, HBox, VBox}
 import scalafx.stage.FileChooser
 
 class BoardScene(
-  mainStage: JFXApp3.PrimaryStage,
-  selectedScene: ObjectProperty[Scenes],
-  selectedBoard: ObjectProperty[Board]
+    mainStage: JFXApp3.PrimaryStage,
+    selectedScene: ObjectProperty[Scenes],
+    selectedBoard: ObjectProperty[Board]
 ) extends Scene:
 
   val board = selectedBoard.value
@@ -622,8 +622,8 @@ class BoardScene(
                 |""".stripMargin
           right = new Button("Close Archive"):
             onAction = _ =>
-              selectedScene.value = Scenes.MainMenu
-              selectedScene.value = Scenes.BoardScene
+              selectedScene.value = Scenes.Menu
+              selectedScene.value = Scenes.Board
 
         val cardContainer = new VBox:
           prefWidth <== archiveStage.width

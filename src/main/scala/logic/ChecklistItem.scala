@@ -4,8 +4,8 @@ import io.circe._
 import io.circe.generic.semiauto._
 
 case class ChecklistItem(
-  var title: String = "New Task",
-  var completed: Boolean = false
+    var title: String = "New Task",
+    var completed: Boolean = false
 ):
 
   def setTitle(title: String): Unit = this.title = title

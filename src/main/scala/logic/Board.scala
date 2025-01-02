@@ -5,13 +5,13 @@ import io.circe.generic.semiauto._
 import scala.collection.mutable.ArrayBuffer
 
 case class Board(
-  var title: String = "New Board",
-  var columns: ArrayBuffer[Column] = ArrayBuffer(
-    new Column("To-do", cards = ArrayBuffer(new Card())),
-    new Column("In Progress"),
-    new Column("Done")
-  ),
-  var archive: ArrayBuffer[Card] = ArrayBuffer[Card]()
+    var title: String = "New Board",
+    var columns: ArrayBuffer[Column] = ArrayBuffer(
+      new Column("To-do", cards = ArrayBuffer(new Card())),
+      new Column("In Progress"),
+      new Column("Done")
+    ),
+    var archive: ArrayBuffer[Card] = ArrayBuffer[Card]()
 ):
 
   def setTitle(title: String): Unit =

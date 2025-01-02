@@ -10,9 +10,9 @@ import scalafx.scene.Scene
 import scalafx.stage.FileChooser
 
 class MenuScene(
-  mainStage: JFXApp3.PrimaryStage,
-  selectedScene: ObjectProperty[Scenes],
-  selectedBoard: ObjectProperty[Board]
+    mainStage: JFXApp3.PrimaryStage,
+    selectedScene: ObjectProperty[Scenes],
+    selectedBoard: ObjectProperty[Board]
 ) extends Scene {
 
   val mainContainer = new MainContainer:
@@ -35,7 +35,7 @@ class MenuScene(
       ,
       new MenuButton("New Board"):
         prefWidth <== mainStage.width * 2 / 3
-        onAction = (event) => selectedScene.value = Scenes.BoardScene
+        onAction = (event) => selectedScene.value = Scenes.Board
       ,
       new MenuButton("Open Board"):
         prefWidth <== mainStage.width * 2 / 3
@@ -47,7 +47,7 @@ class MenuScene(
           if (selectedFile != null) then
             val board = App.load(selectedFile)
             selectedBoard.value = board
-            selectedScene.value = Scenes.BoardScene
+            selectedScene.value = Scenes.Board
       ,
       new QuitButton("Quit"):
         prefWidth <== mainStage.width * 2 / 3

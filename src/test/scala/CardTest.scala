@@ -13,8 +13,7 @@ class CardTest extends AnyFlatSpec with Matchers:
     card.checklist.head.setCompleted(true)
     card.checklistProgress() shouldEqual 1.0 / 3.0
 
-  it should "return 1.0 when using checklistProgression and all items" +
-    " are completed" in:
+  it should "return 1.0 when using checklistProgression and all items are completed" in:
     val card = new Card("Card")
     for _ <- (1 to 3) do
       val item = card.addChecklistItem()

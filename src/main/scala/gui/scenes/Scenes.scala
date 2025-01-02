@@ -1,4 +1,4 @@
 package gui.scenes
 
 enum Scenes:
-  case MainMenu, BoardScene, Close
+  case Menu, Board, Close

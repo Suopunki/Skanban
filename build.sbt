@@ -1,14 +1,19 @@
-ThisBuild / version := "1.0"
+ThisBuild / version := "0.1.0"
 ThisBuild / scalaVersion := "3.3.4"
+
+// Dependency versions
+val scalaFXVersion = "23.0.1-R34"
+val scalaTestVersion = "3.2.19"
+val circeVersion = "0.14.10"
 
 lazy val root = (project in file("."))
   .settings(
     name := "Skanban",
-    libraryDependencies := Seq(
-      "io.circe" %% "circe-core" % "0.14.10",
-      "io.circe" %% "circe-generic" % "0.14.10",
-      "io.circe" %% "circe-parser" % "0.14.10",
-      "org.scalafx" % "scalafx_3" % "23.0.1-R34",
-      "org.scalatest" %% "scalatest" % "3.2.19" % "test"
+    libraryDependencies ++= Seq(
+      "org.scalafx" % "scalafx_3" % scalaFXVersion,
+      "org.scalatest" %% "scalatest" % scalaTestVersion % "test",
+      "io.circe" %% "circe-core" % circeVersion,
+      "io.circe" %% "circe-generic" % circeVersion,
+      "io.circe" %% "circe-parser" % circeVersion
     )
   )
