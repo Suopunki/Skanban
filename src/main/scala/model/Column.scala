@@ -1,11 +1,11 @@
 package model
 
-/** Represents a Column on the Kanban board, which contains multiple cards.
+/** Represents a Column on the Kanban board, which contains multiple [[Card]]s.
   *
   * @param title The title of the column (default is "new Column").
-  * @param cards A vector of cards that belong to this column(defaults to an empty vector).
-  * @param _unfilteredCards An internal vector of cards without any filters applied (defaults to an
-  *   empty vector). This should not be accessed directly.
+  * @param cards A vector of [[Card]]s that belong to this column(defaults to an empty vector).
+  * @param _unfilteredCards An internal vector of [[Card]]s without any filters applied (defaults to
+  *   an empty vector). This should not be accessed directly.
   */
 case class Column(
     title: String = "new Column",
@@ -13,31 +13,31 @@ case class Column(
     _unfilteredCards: Vector[Card] = Vector.empty
 ):
 
-  /** Adds a new card to the column.
+  /** Adds a new default [[Card]] to the column.
     *
     * @return A new instance of `Column` with the added card.
     */
   def addCard(): Column =
     copy(cards = cards :+ Card())
 
-  /** Moves an existing card to a new position in the column.
+  /** Moves an existing [[Card]] to a new position in the column.
     *
-    * @param card The card to be moved.
+    * @param card The [[Card]] to be moved.
     * @param newIndex The new index where the card should be placed.
     * @return A new instance of `Column` with the card moved.
     */
   def moveCard(card: Card, newIndex: Int): Column =
     copy(cards = cards.filterNot(_ == card).patch(newIndex, Seq(card), 0))
 
-  /** Removes a card from the column.
+  /** Removes a [[Card]] from the column.
     *
-    * @param card The card to be removed.
+    * @param card The [[Card]] to be removed.
     * @return A new instance of `Column` with the card removed.
     */
   def removeCard(card: Card): Column =
     copy(cards = cards.filterNot(_ == card))
 
-  /** Sorts the cards in the column by their end date, prioritizing cards with an end date.
+  /** Sorts the [[Card]]s in the column by their end date, prioritizing cards with an end date.
     *
     * @return A new instance of `Column` with the cards sorted by their end date.
     */
@@ -46,7 +46,7 @@ case class Column(
     val sortedWithEndDates = withEndDates.sortBy(_.endDate.get)
     copy(cards = sortedWithEndDates ++ withoutEndDates)
 
-  /** Filters the cards in the column by a specific tag.
+  /** Filters the [[Card]]s in the column by a specific tag.
     *
     * @param tag The tag by which to filter the cards.
     * @return A new instance of `Column` with the cards filtered by the specified tag.

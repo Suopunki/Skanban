@@ -1,11 +1,9 @@
 package model
 
-import scala.collection.immutable.Vector
-
-/** Represents a Kanban Board that contains multiple columns.
+/** Represents a Kanban Board that contains multiple [[Column]]s.
   *
   * @param title The title of the board (default is "New Board").
-  * @param columns A vector of columns on the board.
+  * @param columns A vector of [[Column]]s on the board.
   * @param archive A vector of archived cards.
   */
 case class Board(
@@ -18,16 +16,16 @@ case class Board(
     archive: Vector[Card] = Vector.empty
 ):
 
-  /** Adds a new column to the board.
+  /** Adds a new default [[Column]] to the board.
     *
     * @return A new instance of `Board` with the added column.
     */
   def addColumn(): Board =
     copy(columns = columns :+ Column())
 
-  /** Moves an existing column to a new position on the board.
+  /** Moves an existing [[Column]] to a new position on the board.
     *
-    * @param column The column to be moved.
+    * @param column The [[Column]] to be moved.
     * @param newIndex The new index for the column.
     * @return A new instance of `Board` with the column moved.
     */
@@ -35,15 +33,15 @@ case class Board(
     val updatedColumns = columns.filterNot(_ == column).patch(newIndex, Seq(column), 0)
     copy(columns = updatedColumns)
 
-  /** Removes a column from the board.
+  /** Removes a [[Column]] from the board.
     *
-    * @param column The column to be removed.
+    * @param column The [[Column]] to be removed.
     * @return A new instance of `Board` with the column removed.
     */
   def removeColumn(column: Column): Board =
     copy(columns = columns.filterNot(_ == column))
 
-  /** Adds a new card to the first column of the board (usually the "To do" column).
+  /** Adds a new default [[Card]] to the first [[Column]] of the board (usually the "To do" column).
     *
     * @return A new instance of `Board` with the added card.
     */
@@ -53,14 +51,14 @@ case class Board(
       case None    => columns
     )
 
-  /** Sorts the cards in all columns by their end date.
+  /** Sorts the [[Card]]s in all [[Column]]s by their end date.
     *
     * @return A new instance of `Board` with the cards sorted by end date.
     */
   def sortCardsByEndDate(): Board =
     copy(columns = columns.map(_.sortCardsByEndDate()))
 
-  /** Filters the cards in all columns by a specific tag.
+  /** Filters the [[Card]]s in all [[Column]]s by a specific tag.
     *
     * @param tag The tag by which to filter the cards.
     * @return A new instance of `Board` with the cards filtered by the specified tag.
@@ -68,7 +66,7 @@ case class Board(
   def filterCardsByTag(tag: String): Board =
     copy(columns = columns.map(_.filterCardsByTag(tag)))
 
-  /** Removes any applied filters on the cards in all columns.
+  /** Removes any applied filters on the [[Card]]s in all [[Column]]s.
     *
     * @return A new instance of `Board` with the filters removed.
     */

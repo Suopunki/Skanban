@@ -1,6 +1,6 @@
 package model
 
-/** Represents a Task within a Card's checklist.
+/** Represents a Task within a [[Card]]'s checklist.
   *
   * @param title The title of the task (default is "New Task").
   * @param isCompleted A flag indicating whether the task is completed (default is false).
