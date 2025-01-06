@@ -1,4 +1,4 @@
-package services
+package service
 
 import java.io.{File, FileNotFoundException, IOException}
 import java.nio.file.{Files, Path, Paths, StandardOpenOption}

@@ -1,8 +1,8 @@
-package state
+package persistence
 
-import gui.scenes.Scenes
-import logic.Board
+import model.Board
 import scalafx.beans.property.ObjectProperty
+import scenes.Scenes
 
 case class ApplicationState(
     selectedScene: ObjectProperty[Scenes] = ObjectProperty(Scenes.Menu),

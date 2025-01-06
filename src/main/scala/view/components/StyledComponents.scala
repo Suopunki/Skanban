@@ -1,6 +1,6 @@
-package gui.components
+package view.components
 
-import logic._
+import model.{Card, Column}
 
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
@@ -11,7 +11,7 @@ import scalafx.scene.layout.{HBox, VBox}
 private val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
 class MainContainer extends VBox:
-  stylesheets = Seq("styles/styles.css")
+  stylesheets = Seq("styles.css")
   styleClass = Seq("main-container")
 
 /* ---------- MenuScene: ---------- */
