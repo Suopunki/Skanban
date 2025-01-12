@@ -2,18 +2,13 @@ package controller
 
 import model.Task
 
-class TaskController(private var task: Task, private val onTaskUpdated: Task => Unit):
+class TaskController(val task: Task):
 
-  def getCurrentTask: Task = task
+  def updateTitle(newTitle: String): Unit =
+    task.updateTitle(newTitle)
 
-  def updateTaskTitle(newTitle: String): Unit =
-    task = task.updateTitle(newTitle)
-    onTaskUpdated(task)
+  def toggleCompletion(): Unit =
+    task.toggleCompletion()
 
-  def toggleTaskCompletion(): Unit =
-    task = task.toggleCompletion()
-    onTaskUpdated(task)
-
-  def setTaskCompletion(completed: Boolean): Unit =
-    task = task.setCompletion(completed)
-    onTaskUpdated(task)
+  def setCompletion(completed: Boolean): Unit =
+    task.setCompletion(completed)

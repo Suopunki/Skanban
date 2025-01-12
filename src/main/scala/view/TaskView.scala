@@ -1,30 +1,20 @@
 package view
 
+import controller.TaskController
 import scalafx.scene.control.{CheckBox, TextField}
 import scalafx.scene.layout.HBox
 
-import controller.TaskController
-import model.Task
+class TaskView(controller: TaskController) extends HBox:
 
-class TaskView(initialTask: Task, controller: TaskController) extends HBox:
-  spacing = 10
+  val checkbox = new CheckBox:
+    selected = controller.task.isCompleted()
+    onAction = _ => controller.toggleCompletion()
 
-  // TITLE
-
-  private val titleField = new TextField:
-    text = initialTask.title
-    onAction = _ => controller.updateTaskTitle(text.value)
-    focused.onChange((_, _, newValue) => if !newValue then controller.updateTaskTitle(text.value))
-
-  // CHECKBOX
-
-  private val checkbox = new CheckBox:
-    selected = initialTask.isCompleted
-    onAction = _ => controller.toggleTaskCompletion()
-
-  // CHILDREN
+  val titleField = new TextField:
+    text = controller.task.title()
+    onAction = _ => controller.updateTitle(text())
 
   children = Seq(
-    titleField,
-    checkbox
+    checkbox,
+    titleField
   )
