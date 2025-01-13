@@ -2,7 +2,7 @@ package model
 
 import scalafx.beans.property.{BooleanProperty, StringProperty}
 
-case class Task(
+class Task(
     var isCompleted: BooleanProperty = BooleanProperty(false),
     var title: StringProperty = StringProperty("New Task")
 ):
