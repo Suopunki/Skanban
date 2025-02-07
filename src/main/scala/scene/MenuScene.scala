@@ -1,63 +1,52 @@
-package scenes
+package scene
 
-//package view.scenes
-//
-//import model.Board
-//import view.components._
-//import view.scenes._
-//import java.io.File
-//import scalafx.application.JFXApp3
-//import scalafx.beans.property.ObjectProperty
-//import scalafx.scene.Scene
-//import scalafx.stage.FileChooser
-//
-//class MenuScene(
-//    mainStage: JFXApp3.PrimaryStage,
-//    selectedScene: ObjectProperty[Scenes],
-//    selectedBoard: ObjectProperty[Board]
-//) extends Scene {
-//
-//  val mainContainer = new MainContainer:
-//    minWidth <== mainStage.width
-//    prefWidth <== mainStage.width
-//    maxWidth <== mainStage.width
-//    minHeight <== mainStage.height
-//    prefHeight <== mainStage.height
-//    maxHeight <== mainStage.height
-//
-//  val menuContainer = new MenuContainer:
-//    minHeight <== mainStage.height
-//    minWidth <== mainStage.width
-//    prefHeight <== mainStage.height
-//    prefWidth <== mainStage.width
-//    children ++= Seq(
-//      new KanbafyTitle("Kanbafy"):
-//        minWidth <== mainStage.width
-//        prefWidth <== mainStage.width
-//      ,
-//      new MenuButton("New Board"):
-//        prefWidth <== mainStage.width * 2 / 3
-//        onAction = (event) => selectedScene.value = Scenes.Board
-//      ,
-//      new MenuButton("Open Board"):
-//        prefWidth <== mainStage.width * 2 / 3
-//        onAction = (event) =>
-//          val fileChooser = new FileChooser:
-//            title = "Open Board"
-//            initialDirectory = File("./src/main/resources/saveFiles")
-//          val selectedFile = fileChooser.showOpenDialog(mainStage)
-//          if (selectedFile != null) then
-//            val board = App.load(selectedFile)
-//            selectedBoard.value = board
-//            selectedScene.value = Scenes.Board
-//      ,
-//      new QuitButton("Quit"):
-//        prefWidth <== mainStage.width * 2 / 3
-//        onAction = (event) => selectedScene.value = Scenes.Close
-//    )
-//
-//  mainContainer.children += menuContainer
-//
-//  root = mainContainer
-//
-//}
+import model.Board
+import scalafx.application.JFXApp3.PrimaryStage
+import scalafx.beans.property.ObjectProperty
+import scalafx.scene.Scene
+import scalafx.scene.control.{Button, Label}
+import scalafx.scene.layout.VBox
+import scalafx.stage.FileChooser
+import service.BoardStorageService
+
+class MenuScene(
+    mainStage: PrimaryStage,
+    selectedScene: ObjectProperty[AppScene],
+    selectedBoard: ObjectProperty[Board]
+) extends Scene:
+  stylesheets = Seq("styles/menu.css")
+
+  val titleLabel = new Label("Skanban"):
+    styleClass = Seq("title")
+    prefWidth <== mainStage.width
+
+  val newButton = new Button("New"):
+    styleClass = Seq("button")
+    prefWidth <== mainStage.width / 2
+    onAction = event => selectedScene.value = AppScene.Board
+
+  val openButton = new Button("Open"):
+    styleClass = Seq("button")
+    prefWidth <== mainStage.width / 2
+    onAction = event =>
+      val fileChooser = new FileChooser:
+        title = "Open"
+      val selectedFile = fileChooser.showOpenDialog(mainStage)
+      if (selectedFile != null) then
+        val board = BoardStorageService.load(selectedFile)
+        selectedBoard.value = board.get
+        selectedScene.value = AppScene.Board
+
+  val exitButton = new Button("Exit"):
+    styleClass = Seq("button", "button-exit")
+    prefWidth <== mainStage.width / 2
+    onAction = event => selectedScene.value = AppScene.Close
+
+  val container = new VBox:
+    styleClass = Seq("container")
+    prefHeight <== mainStage.height
+    prefWidth <== mainStage.width
+
+    children = Seq(titleLabel, newButton, openButton, exitButton)
+
+  root = container

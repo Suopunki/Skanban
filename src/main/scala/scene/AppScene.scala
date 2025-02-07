@@ -1,4 +1,4 @@
 package scene
 
-enum Scene:
+enum AppScene:
   case Menu, Board, Archive, Close

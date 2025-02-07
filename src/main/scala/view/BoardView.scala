@@ -5,10 +5,11 @@ import scalafx.application.Platform
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.Node
 import scalafx.scene.control.*
+import scalafx.scene.input.{DragEvent, MouseEvent}
 import scalafx.scene.layout.{HBox, VBox}
 
 import controller.{BoardController, ColumnController}
-import model.Board
+import model.{Board, Column}
 
 class BoardView(initialBoard: Board, controller: BoardController) extends VBox:
   spacing = 15
@@ -73,36 +74,36 @@ class BoardView(initialBoard: Board, controller: BoardController) extends VBox:
 
       new HBox:
         children = Seq(columnView)
-
-        onDragDetected = event =>
-          val db = startDragAndDrop()
-          db.setContent:
-            val content = new javafx.scene.input.ClipboardContent()
-            val dragData = s"COLUMN_DRAG_ID:${board.columns.indexOf(column)}"
-            content
-          event.consume()
-
-        onDragOver = event =>
-          val dragData = event.getDragboard.getString
-          if event.getGestureSource != this && dragData
-              .split(":")
-              .headOption
-              .contains("COLUMN_DRAG_ID")
-          then event.acceptTransferModes(javafx.scene.input.TransferMode.MOVE)
-          event.consume()
-
-        onDragDropped = event =>
-          val db = event.getDragboard
-          if db.hasString && db.getString.startsWith("COLUMN_DRAG_ID:") then
-            val sourceIndex = db.getString.split(":")(1).toInt
-            val sourceColumn = controller.getCurrentBoard.columns(sourceIndex)
-            val targetIndex =
-              columnsContainer.content.value.asInstanceOf[HBox].children.indexOf(this)
-            controller.moveColumn(sourceColumn, targetIndex)
-            event.setDropCompleted(true)
-          else event.setDropCompleted(false)
-          event.consume()
+        onDragDetected = event => handleOnDragDetected(event, board, column)
+        onDragOver = event => handleOnDragOver(event)
+        onDragDropped = event => handleOnDragDropped(event)
     )
+
+  private def handleOnDragDetected(event: MouseEvent, board: Board, column: Column): Unit =
+    val db = startDragAndDrop()
+    db.setContent:
+      val content = new javafx.scene.input.ClipboardContent()
+      val dragData = s"COLUMN_DRAG_ID:${board.columns.indexOf(column)}"
+      content
+    event.consume()
+
+  private def handleOnDragOver(event: DragEvent): Unit =
+    val dragData = event.getDragboard.getString
+    if event.getGestureSource != this && dragData.split(":").headOption.contains("COLUMN_DRAG_ID")
+    then event.acceptTransferModes(javafx.scene.input.TransferMode.MOVE)
+    event.consume()
+
+  private def handleOnDragDropped(event: DragEvent): Unit =
+    val db = event.getDragboard
+    if db.hasString && db.getString.startsWith("COLUMN_DRAG_ID:") then
+      val sourceIndex = db.getString.split(":")(1).toInt
+      val sourceColumn = controller.getCurrentBoard.columns(sourceIndex)
+      val targetIndex =
+        columnsContainer.content.value.asInstanceOf[HBox].children.indexOf(this)
+      controller.moveColumn(sourceColumn, targetIndex)
+      event.setDropCompleted(true)
+    else event.setDropCompleted(false)
+    event.consume()
 
   // CHILDREN
 

@@ -3,7 +3,6 @@ package controller
 import model.{Board, Card, Column}
 
 class BoardController(private var board: Board):
-
   def getCurrentBoard: Board = board
 
   def addColumn(): Unit =
@@ -28,6 +27,6 @@ class BoardController(private var board: Board):
     board = board.removeCardFilter()
 
   def handleColumnUpdate(oldColumn: Column, newColumn: Column): Unit =
-    board = board.copy(columns = board.columns.map(column =>
-      if column == oldColumn then newColumn else column
-    ))
+    board = board.copy(columns =
+      board.columns.map(column => if column == oldColumn then newColumn else column)
+    )

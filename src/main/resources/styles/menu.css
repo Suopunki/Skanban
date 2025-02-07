@@ -1,0 +1,52 @@
+.root {
+    -fx-background-color: #1E1E1E;
+}
+
+.title {
+    -fx-text-fill: #F5F5F5;
+
+    -fx-font-family: "Poppins", sans-serif;
+    -fx-font-size: 84px;
+    -fx-font-weight: bold;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0, 2, 2);
+
+    -fx-padding-bottom: 72px;
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-background-color: #2E2E2E;
+    -fx-text-fill: #F5F5F5;
+
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
+
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 15px 40px;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 3, 3);
+}
+
+.button:hover {
+    -fx-background-color: #383838;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 4, 4);
+}
+
+.button-exit {
+    -fx-background-color: #FF3A3A;
+}
+
+.button-exit:hover {
+    -fx-background-color: #FF4D4D;
+}
+
+.container {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+}

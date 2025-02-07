@@ -42,7 +42,7 @@ case class Column(
     * @return A new instance of `Column` with the cards sorted by their end date.
     */
   def sortCardsByEndDate(): Column =
-    val (withEndDates, withoutEndDates) = cards.partition(_.endDate.nonEmpty)
+    val (withEndDates, withoutEndDates) = cards.partition(_.endDate().nonEmpty)
     val sortedWithEndDates = withEndDates.sortBy(_.endDate.get)
     copy(cards = sortedWithEndDates ++ withoutEndDates)
 
@@ -53,7 +53,7 @@ case class Column(
     */
   def filterCardsByTag(tag: String): Column =
     val unfilteredCards = if _unfilteredCards.isEmpty then cards else _unfilteredCards
-    copy(cards = unfilteredCards.filter(_.tag.exists(_ == tag)), _unfilteredCards = unfilteredCards)
+    copy(cards = unfilteredCards.filter(_.tag().exists(_ == tag)), _unfilteredCards = unfilteredCards)
 
   /** Removes any applied filters on the cards.
     *

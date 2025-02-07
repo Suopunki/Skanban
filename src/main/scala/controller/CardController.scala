@@ -1,45 +1,65 @@
 package controller
 
+import model.{Card, Task}
+import scalafx.collections.ObservableBuffer.Add
+
 import java.time.LocalDate
 
-import model.{Card, Task}
+class CardController(val card: Card):
 
-class CardController(private var card: Card, private val onCardUpdated: Card => Unit):
+  // Constructor block for adding listeners to the card's checklist and its tasks to update the progress bar
+  {
+    // Add listeners to existing tasks
+    card.checklist.foreach(addTaskCompletionListener)
 
-  def getCurrentCard: Card = card
+    // Add listeners to new tasks, when added, and update checklist progress on all changes
+    card.checklist.onChange((_, changes) =>
+      changes.foreach {
+        case Add(_, addedTasks) => addedTasks.foreach(addTaskCompletionListener)
+        case _                  => ()
+      }
+      updateChecklistProgress()
+    )
+
+    def addTaskCompletionListener(task: Task): Unit =
+      task.isCompleted.onChange((_, _, _) => updateChecklistProgress())
+
+    def updateChecklistProgress(): Unit =
+      card.checklistProgress.update(card.calculateChecklistProgress())
+  }
 
   def updateTitle(newTitle: String): Unit =
-    card = card.updateTitle(newTitle)
-    onCardUpdated(card)
+    card.updateTitle(newTitle)
 
-  def updateTag(newTag: Option[String]): Unit =
-    card = card.updateTag(newTag)
-    onCardUpdated(card)
+  def updateTag(newTag: String): Unit =
+    card.updateTag(newTag)
 
-  def updateStartDate(date: Option[LocalDate]): Unit =
-    card = card.updateStartDate(date)
-    onCardUpdated(card)
+  def removeTag(): Unit =
+    card.removeTag()
 
-  def updateEndDate(date: Option[LocalDate]): Unit =
-    card = card.updateEndDate(date)
-    onCardUpdated(card)
+  def updateStartDate(date: LocalDate): Unit =
+    card.updateStartDate(date)
 
-  def updateDescription(description: Option[String]): Unit =
-    card = card.updateDescription(description)
-    onCardUpdated(card)
+  def removeStartDate(): Unit =
+    card.removeStartDate()
 
-  def addTask(task: Task = Task()): Unit =
-    card = card.addTask(task)
-    onCardUpdated(card)
+  def updateEndDate(date: LocalDate): Unit =
+    card.updateEndDate(date)
+
+  def removeEndDate(): Unit =
+    card.removeEndDate()
+
+  def updateDescription(description: String): Unit =
+    card.updateDescription(description)
+
+  def removeDescription(): Unit =
+    card.removeDescription()
+
+  def addNewTask(): Unit =
+    card.addNewTask()
+
+  def insertTask(index: Int, task: Task): Unit =
+    card.insertTask(index, task)
 
   def removeTask(task: Task): Unit =
-    card = card.removeTask(task)
-    onCardUpdated(card)
-
-  def updateTask(oldTask: Task, newTask: Task): Unit =
-    card = card.updateTask(oldTask, newTask)
-    onCardUpdated(card)
-
-  def handleTaskUpdate(oldTask: Task, newTask: Task): Unit =
-    updateTask(oldTask, newTask)
-
+    card.removeTask(task)

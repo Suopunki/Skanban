@@ -11,7 +11,7 @@ import scalafx.scene.layout.{HBox, VBox}
 private val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
 class MainContainer extends VBox:
-  stylesheets = Seq("styles.css")
+  stylesheets = Seq("styles/styles.css")
   styleClass = Seq("main-container")
 
 /* ---------- MenuScene: ---------- */

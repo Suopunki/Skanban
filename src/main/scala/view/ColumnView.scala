@@ -19,7 +19,7 @@ class ColumnView(initialColumn: Column, controller: ColumnController) extends VB
   private val titleLabel: Label = new Label(initialColumn.title)
 
   private val sortButton: Button = new Button("Sort by Date"):
-      onAction = _ => controller.sortByEndDate()
+    onAction = _ => controller.sortByEndDate()
 
   private val filterField = new TextField:
     promptText = "Filter by tag..."
@@ -61,8 +61,8 @@ class ColumnView(initialColumn: Column, controller: ColumnController) extends VB
 
   private def createCardViews(column: Column) =
     column.cards.map(card =>
-      val cardController = new CardController(card, updatedCard => controller.handleCardUpdate(card, updatedCard))
-      val cardView = new CardView(card, cardController)
+      val cardController = CardController(card)
+      val cardView = CardView(cardController)
 
       // Wrap cardView for dragging and dropping
       new VBox:
@@ -93,8 +93,7 @@ class ColumnView(initialColumn: Column, controller: ColumnController) extends VB
       val targetIndex = cardsBox.children.indexOf(this)
       controller.moveCard(sourceCard, targetIndex)
       event.setDropCompleted(true)
-    else
-      event.setDropCompleted(false)
+    else event.setDropCompleted(false)
     event.consume()
 
   // CHILDREN

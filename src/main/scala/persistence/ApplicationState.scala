@@ -2,9 +2,9 @@ package persistence
 
 import model.Board
 import scalafx.beans.property.ObjectProperty
-import scenes.Scenes
+import scene.AppScene
 
 case class ApplicationState(
-    selectedScene: ObjectProperty[Scenes] = ObjectProperty(Scenes.Menu),
+    selectedScene: ObjectProperty[AppScene] = ObjectProperty(AppScene.Menu),
     selectedBoard: ObjectProperty[Board] = ObjectProperty(Board())
 )

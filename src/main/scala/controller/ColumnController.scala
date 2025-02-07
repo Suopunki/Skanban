@@ -1,9 +1,8 @@
 package controller
 
-import model.{Column, Card}
+import model.{Card, Column}
 
 class ColumnController(private var column: Column, private val onColumnUpdated: Column => Unit):
-
   def getCurrentColumn: Column = column
 
   def addCard(): Unit =
@@ -31,7 +30,5 @@ class ColumnController(private var column: Column, private val onColumnUpdated: 
     onColumnUpdated(column)
 
   def handleCardUpdate(oldCard: Card, newCard: Card): Unit =
-    column = column.copy(cards = column.cards.map(card =>
-      if (card == oldCard) newCard else card
-    ))
+    column = column.copy(cards = column.cards.map(card => if (card == oldCard) newCard else card))
     onColumnUpdated(column)
