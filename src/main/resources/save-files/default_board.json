@@ -1,0 +1,31 @@
+{
+  "title" : "New Board",
+  "columns" : [
+    {
+      "title" : "To-do",
+      "cards" : [
+        {
+          "title" : "New Card",
+          "tag" : null,
+          "startDate" : null,
+          "deadline" : null,
+          "description" : null,
+          "checklist" : [
+          ]
+        }
+      ]
+    },
+    {
+      "title" : "In Progress",
+      "cards" : [
+      ]
+    },
+    {
+      "title" : "Done",
+      "cards" : [
+      ]
+    }
+  ],
+  "archive" : [
+  ]
+}

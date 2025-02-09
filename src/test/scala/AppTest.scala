@@ -7,7 +7,7 @@ class AppTest extends AnyFlatSpec with Matchers:
 
   "App" should "save to and then load from a save file" in:
     // Save the board
-    val file = new File("./src/main/resources/saveFiles/test.json")
+    val file = new File("./src/main/resources/save-files/test.json")
     val board = new Board()
     val card = board.columns.head.cards.head
     card.addChecklistItem()

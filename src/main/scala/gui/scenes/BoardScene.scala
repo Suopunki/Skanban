@@ -474,7 +474,7 @@ class BoardScene(
     prefWidth <== mainStage.width
 
     val fileMenu = new BoardMenu("File"):
-      private val saveDir = File("./src/main/resources/saveFiles")
+      private val saveDir = File("./src/main/resources/save-files")
       private var saveFile: Option[File] = None
 
       val saveKeyBind =

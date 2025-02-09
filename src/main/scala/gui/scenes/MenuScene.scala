@@ -42,7 +42,7 @@ class MenuScene(
         onAction = (event) =>
           val fileChooser = new FileChooser:
             title = "Open Board"
-            initialDirectory = File("./src/main/resources/saveFiles")
+            initialDirectory = File("./src/main/resources/save-files")
           val selectedFile = fileChooser.showOpenDialog(mainStage)
           if (selectedFile != null) then
             val board = App.load(selectedFile)

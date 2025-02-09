@@ -51,6 +51,6 @@ object App:
     val decoded: Either[Error, Board] = decode(jsonString)
     decoded match
       case Left(e: Error) => { println("Error decoding file"); throw e }
-      case Right(board) => board
+      case Right(board)   => board
 
 end App

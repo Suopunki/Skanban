@@ -20,9 +20,9 @@ object Main extends JFXApp3:
 
     selectedScene.onChange((_, _, newValue) =>
       newValue match
-        case Scenes.MainMenu      => stage.setScene(menuScene)
-        case Scenes.BoardScene    => stage.setScene(boardScene)
-        case Scenes.Close         => stage.close()
+        case Scenes.MainMenu   => stage.setScene(menuScene)
+        case Scenes.BoardScene => stage.setScene(boardScene)
+        case Scenes.Close      => stage.close()
     )
 
     mainStage.scene = menuScene

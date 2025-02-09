@@ -59,5 +59,4 @@ class BoardTest extends AnyFlatSpec with Matchers:
     board.removeFilter()
     board.columns.last.cards.length shouldEqual 3
 
-
 end BoardTest
