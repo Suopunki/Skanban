@@ -1,63 +1,52 @@
 package model
 
-/** Represents a Column on the Kanban board, which contains multiple [[Card]]s.
-  *
-  * @param title The title of the column (default is "new Column").
-  * @param cards A vector of [[Card]]s that belong to this column(defaults to an empty vector).
-  * @param _unfilteredCards An internal vector of [[Card]]s without any filters applied (defaults to
-  *   an empty vector). This should not be accessed directly.
-  */
-case class Column(
-    title: String = "new Column",
-    cards: Vector[Card] = Vector.empty,
-    _unfilteredCards: Vector[Card] = Vector.empty
+import io.circe.syntax.EncoderOps
+import io.circe.{Decoder, Encoder, HCursor, Json}
+import scalafx.beans.property.StringProperty
+import scalafx.collections.ObservableBuffer
+import utils.json.scalafx.ObservableBufferCodec.*
+import utils.json.scalafx.StringPropertyCodec.*
+
+class Column(
+    val title: StringProperty = StringProperty("New Column"),
+    val cards: ObservableBuffer[Card] = ObservableBuffer[Card]()
 ):
+  def addCard(card: Card = Card()): Unit =
+    cards += card
 
-  /** Adds a new default [[Card]] to the column.
-    *
-    * @return A new instance of `Column` with the added card.
-    */
-  def addCard(): Column =
-    copy(cards = cards :+ Card())
+  def moveCardToIndex(card: Card, index: Int): Unit =
+    cards.remove(card)
+    cards.insert(index, card)
 
-  /** Moves an existing [[Card]] to a new position in the column.
-    *
-    * @param card The [[Card]] to be moved.
-    * @param newIndex The new index where the card should be placed.
-    * @return A new instance of `Column` with the card moved.
-    */
-  def moveCard(card: Card, newIndex: Int): Column =
-    copy(cards = cards.filterNot(_ == card).patch(newIndex, Seq(card), 0))
+  def removeCard(card: Card): Unit =
+    cards.remove(card)
 
-  /** Removes a [[Card]] from the column.
-    *
-    * @param card The [[Card]] to be removed.
-    * @return A new instance of `Column` with the card removed.
-    */
-  def removeCard(card: Card): Column =
-    copy(cards = cards.filterNot(_ == card))
+  def sortCardsByStartDate(): Unit =
+    val (withStartDates, withoutStartDates) = cards.partition(_.startDate.value.nonEmpty)
+    val sortedWithStartDates = withStartDates.sortBy(_.startDate.get)
+    cards.clear()
+    cards ++= (sortedWithStartDates ++ withoutStartDates)
 
-  /** Sorts the [[Card]]s in the column by their end date, prioritizing cards with an end date.
-    *
-    * @return A new instance of `Column` with the cards sorted by their end date.
-    */
-  def sortCardsByEndDate(): Column =
-    val (withEndDates, withoutEndDates) = cards.partition(_.endDate().nonEmpty)
+  def sortCardsByEndDate(): Unit =
+    val (withEndDates, withoutEndDates) = cards.partition(_.endDate.value.nonEmpty)
     val sortedWithEndDates = withEndDates.sortBy(_.endDate.get)
-    copy(cards = sortedWithEndDates ++ withoutEndDates)
+    cards.clear()
+    cards ++= (sortedWithEndDates ++ withoutEndDates)
 
-  /** Filters the [[Card]]s in the column by a specific tag.
-    *
-    * @param tag The tag by which to filter the cards.
-    * @return A new instance of `Column` with the cards filtered by the specified tag.
-    */
-  def filterCardsByTag(tag: String): Column =
-    val unfilteredCards = if _unfilteredCards.isEmpty then cards else _unfilteredCards
-    copy(cards = unfilteredCards.filter(_.tag().exists(_ == tag)), _unfilteredCards = unfilteredCards)
+  def filterCardsByTag(tag: String): ObservableBuffer[Card] =
+    cards.filter(_.tag.value.exists(_ == tag))
 
-  /** Removes any applied filters on the cards.
-    *
-    * @return A new instance of `Column` with the original (unfiltered) cards.
-    */
-  def removeCardFilter(): Column =
-    copy(cards = _unfilteredCards, _unfilteredCards = Vector.empty)
+object Column:
+  implicit val columnEncoder: Encoder[Column] = Encoder.instance((column: Column) =>
+    Json.obj(
+      "title" -> column.title.asJson,
+      "cards" -> column.cards.asJson
+    )
+  )
+
+  implicit val columnDecoder: Decoder[Column] = Decoder.instance((cursor: HCursor) =>
+    for
+      title <- cursor.downField("title").as[StringProperty]
+      cards <- cursor.downField("cards").as[ObservableBuffer[Card]]
+    yield Column(title, cards)
+  )
